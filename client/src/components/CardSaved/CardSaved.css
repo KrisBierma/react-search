@@ -1,0 +1,8 @@
+.card {
+  box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+  margin: 25px;
+  text-align: center;
+}
+.btn:hover{
+  font-size:18px;
+}
