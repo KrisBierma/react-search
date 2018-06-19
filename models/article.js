@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const articleSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   date: {
     type: Date,
@@ -12,7 +13,8 @@ const articleSchema = new Schema({
   },
   url: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   }
 });
 

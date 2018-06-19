@@ -1,9 +1,10 @@
+//axios is like jquery, make requests from within app
 import axios from "axios";
 
 const api = {
   // Gets all articles
   getArticles: function() {
-    return axios.get("/api/saved");
+    return axios.get("/api/articles");
   },
   // Gets the articles with the given id
   // getArticles: function(id) {
@@ -19,7 +20,7 @@ const api = {
     console.log("API: "+ArticlesData);
     console.log(ArticlesData.id, ArticlesData.title, ArticlesData.url);
 
-    return axios.post("/api/saved", ArticlesData);
+    return axios.post("/api/articles", ArticlesData);
   },
 
   // searchNYT: function(data){

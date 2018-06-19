@@ -5,13 +5,10 @@
   "main": "server.js",
   "dependencies": {
     "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
-    "express": "^4.16.3",
     "gh-pages": "^1.2.0",
     "if-env": "^1.0.4",
     "mongo": "^0.1.0",
-    "mongoose": "^5.1.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4"
@@ -27,7 +24,10 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "devDependencies": {
-    "concurrently": "^3.5.0",
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.6",
     "nodemon": "^1.11.0"
   },
   "keywords": [],

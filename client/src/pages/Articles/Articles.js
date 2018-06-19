@@ -22,11 +22,13 @@ class Articles extends Component {
   };
 
 //once everything's rendered and the componens are ready...
-//  componentDidMount() {
-//    this.loadArticles();
-//    this.setState({topic:"", startYear:"", endYear:""});
-//    console.log(this.state.topic, this.state.startYear, this.state.endYear);
-//  }
+ componentDidMount() {
+  this.renderSavedArticles();
+  console.log(this.state.saved);
+  //  this.loadArticles();
+  //  this.setState({topic:"", startYear:"", endYear:""});
+  //  console.log(this.state.topic, this.state.startYear, this.state.endYear);
+ }
 
 //  loadArticles = () => {
 //    API.getArticles()
@@ -38,9 +40,12 @@ class Articles extends Component {
 
  renderSavedArticles = () => {
    console.log("renderSavedArt");
+   console.log(this.state.saved);
   API.getArticles()
-    .then(res =>
-      this.setState({saved: res.data}))
+    .then(res => {
+      this.setState({saved: res.data})
+    })
+    .then(console.log(this.state.saved))
     .catch(err => console.log(err));
  }
 
@@ -66,7 +71,7 @@ class Articles extends Component {
     .then(res => this.renderSavedArticles())
     .catch(err => console.log(err));
   console.log(this.state.saved);
-};
+  };
 
  handleInputChange = event => {
    const { name, value } = event.target;
@@ -148,8 +153,8 @@ handleFormSubmit = (event) => {
            <h1>Saved Articles</h1>
            {this.state.saved.map(save => (
              <CardSaved
-              url={save.web_url}
-              title={save.headline.main}
+              url={save.url}
+              title={save.title}
               id={save._id}
               key={save._id}
               />

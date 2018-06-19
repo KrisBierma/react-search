@@ -6,6 +6,10 @@ router.route("/")
   .get(articlesController.findAll)
   .post(articlesController.create);
 
+router.route("/api/articles")
+  .post(articlesController.create)
+  .get(articlesController.findAll);
+
 // Matches with "/api/articles/:id"
 // router.route("/:id")
 //   .get(articlesController.findById)
