@@ -10,8 +10,10 @@ const api = {
   // getArticles: function(id) {
   //   return axios.get("/api/articles/" + id);
   // },
+
   // Deletes the articles with the given id
   deleteArticles: function(id) {
+    console.log("id: "+id); //getting id correctly
     return axios.delete("/api/articles/" + id);
   },
 

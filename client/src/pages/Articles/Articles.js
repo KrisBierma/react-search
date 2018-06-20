@@ -25,6 +25,7 @@ class Articles extends Component {
  componentDidMount() {
   this.renderSavedArticles();
   console.log(this.state.saved);
+  console.log(this.state.articles);
   //  this.loadArticles();
   //  this.setState({topic:"", startYear:"", endYear:""});
   //  console.log(this.state.topic, this.state.startYear, this.state.endYear);
@@ -39,21 +40,41 @@ class Articles extends Component {
 //  };
 
  renderSavedArticles = () => {
+  //  this.setState({saved:[], article:[]});
    console.log("renderSavedArt");
    console.log(this.state.saved);
+   console.log(this.state.articles);
   API.getArticles()
     .then(res => {
-      this.setState({saved: res.data})
+      this.setState({saved: res.data});
+      console.log("res.data: "+res.data)
     })
-    .then(console.log(this.state.saved))
+    // .then((res) => {
+    //   this.setState({ articles: res.data.response.docs });
+    //   console.log("this.state.articles: ", this.state.articles);
+    // });
+    .then(console.log("saved: "+this.state.saved))
+    .then(console.log(this.state.articles))
     .catch(err => console.log(err));
  }
 
-//  deleteArticles = id => {
-//    API.deleteArticles(id)
-//      .then(res => this.loadArticles())
-//      .catch(err => console.log(err));
-//  };
+ deleteArticles = id => {
+   console.log(id);
+
+   const findArt = this.state.saved.find(element => element._id === id);
+   console.log(findArt);
+   const tempArr = this.state.saved.filter(saved => saved._id !== id);
+   console.log(tempArr);
+   console.log(this.state.saved);
+   this.setState({saved: tempArr});
+  //  const deleteSaved = {id: findArt._id};
+   console.log(this.state.saved);
+
+   API.deleteArticles(id)
+     .then(res => this.renderSavedArticles())
+     .then(console.log(id))
+     .catch(err => console.log(err));
+ };
 
  //clicking the save article btn attached to an article
  saveArticles = id => {
@@ -61,16 +82,28 @@ class Articles extends Component {
 
   //search through artciles arr to find the one that matches the btn id
   const findArt = this.state.articles.find(el => el._id === id);
-  console.log(findArt);
-  console.log(this.state.articles);
+console.log(findArt);
+  //filter through articles array and take out the one article that's been saved
+  const tempArr = this.state.articles.filter((article => article._id !== id));
+
+  //set the articles array = to the tempArr from above
+  this.setState({articles: tempArr});
+  // console.log(this.state.saved);
+  // this.setState({saved: findArt});
 
   //save the found article's info in const to send to api
   const newSaved = {id: findArt._id, title: findArt.headline.main, url: findArt.web_url};
   console.log(newSaved);
   API.saveArticles(newSaved)
+    .then((res) => {
+      // console.log(res.data);
+      // this.setState({ saved: res.data});
+      // console.log(res.data);
+      // console.log("this.state.saved: ", this.state.saved);
+    })
     .then(res => this.renderSavedArticles())
     .catch(err => console.log(err));
-  console.log(this.state.saved);
+  // console.log(this.state.saved);
   };
 
  handleInputChange = event => {
@@ -153,6 +186,7 @@ handleFormSubmit = (event) => {
            <h1>Saved Articles</h1>
            {this.state.saved.map(save => (
              <CardSaved
+              deleteArticles={this.deleteArticles}
               url={save.url}
               title={save.title}
               id={save._id}
