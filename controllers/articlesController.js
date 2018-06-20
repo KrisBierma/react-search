@@ -3,7 +3,6 @@ const db = require("../models");
 // Defining methods for the articlesController
 module.exports = {
   findAll: function(req, res) {
-    console.log("-------------------------------\n"+"query: "+req.query);
     db.Article
       .find(req.query)
       .sort({ date: -1 })
@@ -17,7 +16,6 @@ module.exports = {
   //     .catch(err => res.status(422).json(err));
   // },
   create: function(req, res) {
-    console.log("------------------------\n"+"19: "+req.body.id);
     db.Article
       .create(req.body)
       .then(dbModel => res.json(dbModel))
@@ -30,7 +28,6 @@ module.exports = {
   //     .catch(err => res.status(422).json(err));
   // },
   remove: function(req, res) {
-    console.log("-----------------------\n"+"32: "+req.params.id);
     db.Article
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
